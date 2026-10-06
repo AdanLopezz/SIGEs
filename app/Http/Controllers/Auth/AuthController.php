@@ -8,6 +8,6 @@ class AuthController extends Controller
 {
     public function showAccess()
     {
-        return view('auth.acceso');
+        return view('auth.acceso', ['panel' => 'login']);
     }
 }
