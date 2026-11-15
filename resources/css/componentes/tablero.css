@@ -1,0 +1,23 @@
+/* Tablero del inicio por rol (App\Support\Tablero, <x-indicador>). */
+.tablero-seccion{margin-bottom:24px}
+.tablero-titulo{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:1.05rem;color:var(--siges-primary-dark)}
+.tablero-titulo i{color:var(--siges-secondary)}
+.tablero-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+
+.indicador{display:flex;flex-direction:column;gap:4px;padding:16px;background:var(--white);border:1px solid var(--borde);border-left:4px solid var(--neutro);border-radius:14px;color:var(--text-primary);text-decoration:none}
+.indicador-exito{border-left-color:var(--exito)}
+.indicador-aviso{border-left-color:var(--aviso)}
+.indicador-peligro{border-left-color:var(--peligro)}
+.indicador-info{border-left-color:var(--siges-secondary)}
+.indicador-encabezado{display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:.875rem}
+.indicador-valor{font-size:1.75rem;line-height:1.2;color:var(--siges-primary-dark)}
+.indicador-detalle{color:var(--text-secondary)}
+.indicador-lista{margin:6px 0 0;padding-top:6px;border-top:1px solid var(--borde);font-size:.8125rem}
+.indicador-lista div{display:flex;justify-content:space-between;gap:8px}
+.indicador-lista dt{font-weight:400;color:var(--text-secondary)}
+.indicador-lista dd{margin:0;font-weight:600}
+.indicador-enlace{transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.indicador-enlace:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,63,115,.1);color:var(--text-primary)}
+.indicador-enlace:focus-visible{outline:2px solid var(--siges-accent);outline-offset:2px}
+
+@media(prefers-reduced-motion:reduce){.indicador-enlace{transition:none!important}}

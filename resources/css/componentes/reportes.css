@@ -1,0 +1,34 @@
+/* Reportes: gráfica de barras con CSS (<x-barras>, <progress>), resumen y hoja imprimible (layouts/impresion). */
+.barras{margin:0;padding:16px 20px;border-bottom:1px solid var(--borde)}
+.barras-lista{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.barras-fila{display:grid;grid-template-columns:minmax(90px,200px) 1fr minmax(56px,auto);align-items:center;gap:10px;font-size:.8125rem}
+.barras-etiqueta{overflow:hidden;color:var(--text-secondary);text-overflow:ellipsis;white-space:nowrap}
+.barras-valor{font-weight:600;text-align:right;color:var(--text-primary)}
+.barras-progreso{width:100%;height:12px;border:none;border-radius:6px;background:var(--neutro-fondo);overflow:hidden;appearance:none;-webkit-appearance:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.barras-progreso::-webkit-progress-bar{border-radius:6px;background:var(--neutro-fondo)}
+.barras-progreso::-webkit-progress-value{border-radius:6px;background:var(--siges-secondary)}
+.barras-progreso::-moz-progress-bar{border-radius:6px;background:var(--siges-secondary)}
+
+.reporte-resumen{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0}
+.reporte-resumen div{display:flex;flex-direction:column}
+.reporte-resumen dt{font-weight:400;font-size:.8125rem;color:var(--text-secondary)}
+.reporte-resumen dd{margin:0;font-size:1.25rem;font-weight:700;color:var(--siges-primary-dark)}
+
+.impresion-contenedor:has(.reporte-hoja){max-width:960px;align-items:stretch}
+.reporte-hoja{page:reportes;width:100%;max-width:960px;padding:24px;background:var(--white);border:1px solid var(--borde);border-radius:12px;color:var(--text-primary)}
+.reporte-hoja header{padding-bottom:10px;margin-bottom:14px;border-bottom:2px solid var(--siges-primary)}
+.reporte-hoja header strong{display:block;font-size:1.1rem;color:var(--siges-primary-dark)}
+.reporte-hoja header small{display:block;color:var(--text-secondary)}
+.reporte-hoja .reporte-nota{margin:8px 0 0;font-size:.8rem;color:var(--text-secondary)}
+.reporte-hoja .reporte-seccion{break-inside:avoid-page}
+.reporte-hoja h2{margin:18px 0 8px;font-size:1rem;color:var(--siges-primary-dark)}
+.reporte-hoja .barras{padding:6px 0}
+.reporte-hoja .tabla-siges{font-size:.8rem}
+
+/* Página propia: credencial.css define @page de tamaño credencial para las demás impresiones. */
+@page reportes{size:letter;margin:14mm}
+
+@media print{
+    .impresion-contenedor:has(.reporte-hoja){max-width:none}
+    .reporte-hoja{max-width:none;border:none;border-radius:0;padding:0}
+}

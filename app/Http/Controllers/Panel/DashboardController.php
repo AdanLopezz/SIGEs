@@ -7,7 +7,7 @@ use App\Models\ComNotificacion;
 use App\Models\PerAlumno;
 use App\Models\SysConfiguracion;
 use App\Policies\PortalPolicy;
-use App\Support\Menu;
+use App\Support\Tablero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -22,11 +22,12 @@ class DashboardController extends Controller
             return $this->inicioDelPortal($usuario);
         }
 
-        $modulos = Menu::modulosPara($usuario);
+        // Tarjetas de indicadores según los roles de la cuenta (App\Support\Tablero).
+        $secciones = Tablero::para($usuario);
         $configuracion = SysConfiguracion::actual();
         $plantelConfigurado = $configuracion && filled($configuracion->clave_cct) && filled($configuracion->nombre);
 
-        return view('panel.dashboard', compact('usuario', 'modulos', 'plantelConfigurado'));
+        return view('panel.dashboard', compact('usuario', 'secciones', 'plantelConfigurado'));
     }
 
     private function inicioDelPortal($usuario)

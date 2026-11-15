@@ -110,7 +110,14 @@ return [
             ['titulo' => 'Oficios',     'ruta' => 'oficios.index',     'icono' => 'bi-envelope-paper','permiso' => 'oficios.administrar'],
             ['titulo' => 'Normativos',  'ruta' => 'normativos.index',  'icono' => 'bi-book',          'permiso' => 'normativos.administrar'],
             ['titulo' => 'Encuestas',   'ruta' => 'encuestas.index',   'icono' => 'bi-ui-checks',     'permiso' => 'encuestas.administrar'],
-            ['titulo' => 'Reportes',    'ruta' => 'reportes.index',    'icono' => 'bi-bar-chart',     'permiso' => 'reportes.ver'],
+        ],
+    ],
+
+    // Sección propia: los reportes los usan Dirección, Control Escolar, Orientación, Vinculación y Planeación.
+    [
+        'seccion' => 'Reportes',
+        'opciones' => [
+            ['titulo' => 'Reportes', 'ruta' => 'reportes.index', 'icono' => 'bi-bar-chart', 'permiso' => 'reportes.ver'],
         ],
     ],
 

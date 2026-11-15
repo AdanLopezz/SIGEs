@@ -64,6 +64,7 @@ Route::middleware('auth:web')->group(function () {
         require __DIR__.'/modulos/auditoria.php';
         require __DIR__.'/modulos/prefectura.php';
         require __DIR__.'/modulos/orientacion.php';
+        require __DIR__.'/modulos/reportes.php';
         require __DIR__.'/modulos/portal.php';
     });
 });
