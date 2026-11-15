@@ -18,10 +18,10 @@ class LoginRequest extends FortifyLoginRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Escribe tu correo electrónico.',
-            'email.email' => 'Escribe un correo electrónico válido.',
-            'email.string' => 'El correo debe ser texto.',
-            'email.max' => 'El correo no puede superar 255 caracteres.',
+            'email.required' => 'Escribe tu usuario.',
+            'email.email' => 'Escribe tu usuario completo, con @ y dominio.',
+            'email.string' => 'El usuario debe ser texto.',
+            'email.max' => 'El usuario no puede superar 255 caracteres.',
             'password.required' => 'Escribe tu contraseña.',
             'password.string' => 'La contraseña debe ser texto.',
             'remember.boolean' => 'La opción Recordarme no es válida.',

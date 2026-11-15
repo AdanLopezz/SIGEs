@@ -1,0 +1,368 @@
+/* =========================================================
+   PANTALLA DE ACCESO
+   (también la usan "Recuperar contraseña" y "Nueva contraseña")
+   ========================================================= */
+
+.auth-body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:
+        radial-gradient(circle at 10% 20%,rgba(67,139,208,.15),transparent 30%),
+        radial-gradient(circle at 90% 80%,rgba(23,63,115,.12),transparent 30%),
+        var(--background);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+.auth-wrapper{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.auth-container{
+    position:relative;
+    width:100%;
+    max-width:1050px;
+    min-height:650px;
+    overflow:hidden;
+    background:var(--white);
+    border-radius:26px;
+    box-shadow:0 30px 80px rgba(22,44,72,.15);
+}
+
+/* Formulario: mitad izquierda */
+.form-container{
+    position:absolute;
+    top:0;
+    left:0;
+    width:50%;
+    height:100%;
+}
+
+.auth-form{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:55px 65px;
+}
+
+.form-header{margin-bottom:28px}
+
+.form-header h1{
+    margin-bottom:8px;
+    color:var(--text-primary);
+    font-size:36px;
+    font-weight:750;
+}
+
+.form-header p{
+    margin:0;
+    color:var(--text-secondary);
+    line-height:1.6;
+}
+
+.auth-body .form-control{
+    min-height:57px;
+    border:1px solid #dfe5ec;
+    border-radius:12px;
+    background:#f8fafc;
+}
+
+.auth-body .form-control:focus{
+    background:var(--white);
+    border-color:var(--siges-accent);
+    box-shadow:0 0 0 .25rem rgba(40,104,169,.12);
+}
+
+.auth-body .form-floating>label{color:#667085}
+
+.password-field{position:relative}
+
+.auth-body .password-field .form-control{padding-right:58px}
+
+.password-toggle{
+    position:absolute;
+    top:11px;
+    right:12px;
+    z-index:6;
+    width:36px;
+    height:36px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    border-radius:50%;
+    background:transparent;
+    color:#98a2b3;
+    cursor:pointer;
+    transition:background-color .2s ease,color .2s ease,transform .2s ease;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible{
+    background:#eef3f8;
+    color:var(--siges-primary);
+    outline:none;
+}
+
+.password-toggle:active{transform:scale(.94)}
+
+.login-options{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:24px;
+    font-size:14px;
+}
+
+.form-check-input:checked{
+    background-color:var(--siges-primary);
+    border-color:var(--siges-primary);
+}
+
+.form-check-input:focus{
+    border-color:var(--siges-accent);
+    box-shadow:0 0 0 .2rem rgba(40,104,169,.15);
+}
+
+.forgot-link{
+    color:var(--siges-primary);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.forgot-link:hover{
+    color:var(--siges-primary-dark);
+    text-decoration:underline;
+}
+
+/* Enlace "Volver a iniciar sesión" */
+.auth-back{
+    display:block;
+    margin-top:22px;
+    text-align:center;
+    font-size:14px;
+}
+
+.auth-primary-btn.btn{
+    width:100%;
+    padding:14px;
+    border:none!important;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--siges-primary),var(--siges-secondary))!important;
+    color:#fff!important;
+    font-weight:700;
+    box-shadow:none;
+    transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
+}
+
+.auth-primary-btn.btn:hover{
+    color:#fff!important;
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(23,63,115,.25);
+    filter:brightness(1.04);
+}
+
+.auth-primary-btn.btn:focus,
+.auth-primary-btn.btn:focus-visible,
+.auth-primary-btn.btn:active{
+    border:none!important;
+    background:linear-gradient(135deg,var(--siges-primary-dark),var(--siges-primary))!important;
+    color:#fff!important;
+    box-shadow:0 0 0 .25rem rgba(40,104,169,.18)!important;
+}
+
+.auth-alert{
+    margin-bottom:18px;
+    padding:10px 12px;
+    border-radius:10px;
+    font-size:13px;
+}
+
+/* Panel azul informativo: mitad derecha */
+.overlay-container{
+    position:absolute;
+    top:0;
+    left:50%;
+    width:50%;
+    height:100%;
+    overflow:hidden;
+}
+
+.overlay{
+    position:relative;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#0d315c 0%,#174d83 45%,#2875b7 100%);
+    color:#fff;
+}
+
+.overlay-panel{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:70px;
+    overflow:hidden;
+    text-align:center;
+}
+
+.overlay-content{
+    position:relative;
+    z-index:3;
+    width:100%;
+    max-width:420px;
+}
+
+.system-icon{
+    width:135px;
+    height:135px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 14px;
+}
+
+.system-icon img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 18px rgba(0,0,0,.18));
+}
+
+.overlay-title{
+    margin-bottom:16px;
+    color:#fff;
+    font-size:34px;
+    font-weight:750;
+    line-height:1.15;
+}
+
+.overlay-panel p{
+    max-width:390px;
+    margin:0 auto 14px;
+    color:rgba(255,255,255,.84);
+    font-size:15px;
+    line-height:1.7;
+}
+
+.overlay-panel .overlay-note{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.2);
+    font-size:13.5px;
+    opacity:.9;
+}
+
+/* Pasos del panel azul (recuperar y crear contraseña) */
+.overlay-steps{
+    list-style:none;
+    max-width:300px;
+    margin:6px auto 0;
+    padding:0;
+    text-align:left;
+}
+
+.overlay-steps li{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+    color:rgba(255,255,255,.9);
+    font-size:15px;
+}
+
+.overlay-steps span{
+    flex-shrink:0;
+    width:28px;
+    height:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.35);
+    font-size:13px;
+    font-weight:700;
+}
+
+.overlay-decoration{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.06);
+    pointer-events:none;
+}
+
+.decoration-three{
+    width:230px;
+    height:230px;
+    top:-70px;
+    right:-80px;
+}
+
+.decoration-four{
+    width:140px;
+    height:140px;
+    left:-40px;
+    bottom:-40px;
+}
+
+/* Aviso que solo se ve en celular (cuando se oculta el panel azul) */
+.mobile-switch{
+    display:none;
+    margin-top:25px;
+    color:var(--text-secondary);
+    font-size:14px;
+    text-align:center;
+}
+
+@media(max-width:850px){
+    .auth-body{padding:15px}
+
+    .auth-container{
+        max-width:520px;
+        min-height:620px;
+    }
+
+    .overlay-container{display:none}
+    .form-container{width:100%}
+
+    .auth-form{padding:45px 35px}
+    .mobile-switch{display:block}
+}
+
+@media(max-width:480px){
+    .auth-body{
+        padding:0;
+        background:var(--white);
+    }
+
+    .auth-container{
+        min-height:100vh;
+        border-radius:0;
+        box-shadow:none;
+    }
+
+    .auth-form{padding:35px 25px}
+    .form-header h1{font-size:30px}
+
+    .login-options{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:12px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    .auth-primary-btn,
+    .password-toggle{
+        transition:none!important;
+    }
+}
