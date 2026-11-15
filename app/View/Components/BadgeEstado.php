@@ -42,6 +42,13 @@ class BadgeEstado extends Component
         'LEVE' => ['info', 'Leve', null],
         'MODERADA' => ['aviso', 'Moderada', null],
         'GRAVE' => ['peligro', 'Grave', null],
+        // Vinculación: convenios (CANCELADO es el de permisos) y aspirantes (INSCRITO es el de inscripciones)
+        'VIGENTE' => ['exito', 'Vigente', null],
+        'VENCIDO' => ['neutro', 'Vencido', null],
+        'VENCE_PRONTO' => ['aviso', 'Vence pronto', 'bi-hourglass-split'],
+        'PROSPECTO' => ['info', 'Prospecto', null],
+        'REGISTRADO' => ['aviso', 'Registrado', null],
+        'DESCARTADO' => ['neutro', 'Descartado', null],
         // Seguimiento del alumno (EN_SEGUIMIENTO es el mismo de Incidencias)
         'ABIERTO' => ['aviso', 'Abierto', null],
         'CERRADO' => ['neutro', 'Cerrado', null],

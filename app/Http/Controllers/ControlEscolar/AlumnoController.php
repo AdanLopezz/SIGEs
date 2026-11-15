@@ -20,10 +20,12 @@ use App\Models\TrxAsistenciaClase;
 use App\Models\TrxCalificacion;
 use App\Models\TrxIncidencia;
 use App\Models\TrxResultadoAsignatura;
+use App\Models\TrxAspirante;
 use App\Models\TrxSeguimientoAlumno;
 use App\Support\Auditoria;
 use App\Support\CredencialesDeAcceso;
 use App\Support\PeriodoDeTrabajo;
+use Illuminate\Http\Request;
 
 class AlumnoController extends Controller
 {
@@ -47,15 +49,30 @@ class AlumnoController extends Controller
         return view('control-escolar.alumnos.index', compact('alumnos', 'filtros', 'grupos', 'carreras', 'estados'));
     }
 
-    public function create()
+    // ?aspirante=ID: "Convertir en alumno" (Vinculación → Aspirantes) con los datos de la persona y la carrera ya llenos.
+    public function create(Request $solicitud)
     {
-        return $this->formulario(new PerAlumno);
+        $aspirante = $solicitud->filled('aspirante') ? TrxAspirante::with('persona')->find($solicitud->integer('aspirante')) : null;
+        if ($solicitud->filled('aspirante') && $aspirante?->estado !== TrxAspirante::REGISTRADO) {
+            return redirect()->route('aspirantes.index')->withErrors(['accion' => 'Solo se convierte en alumno un aspirante registrado.']);
+        }
+        $alumno = new PerAlumno;
+        if ($aspirante) {
+            $alumno->aca_carrera_id = $aspirante->aca_carrera_id;
+            $alumno->setRelation('persona', $aspirante->persona);
+        }
+
+        return $this->formulario($alumno, $aspirante);
     }
 
     public function store(AlumnoRequest $solicitud)
     {
         Auditoria::motivoPorDefecto('Alta de alumno');
-        $alumno = PerAlumno::registrar($solicitud->safe()->except('expediente'), $solicitud->file('expediente'), $solicitud->user());
+        $datos = $solicitud->safe()->except(['expediente', 'trx_aspirante_id']);
+        // Desde un aspirante: el alta y el paso del aspirante a INSCRITO van en la misma transacción.
+        $alumno = $solicitud->filled('trx_aspirante_id')
+            ? TrxAspirante::findOrFail($solicitud->validated('trx_aspirante_id'))->convertir($datos, $solicitud->file('expediente'), $solicitud->user())
+            : PerAlumno::registrar($datos, $solicitud->file('expediente'), $solicitud->user());
         $mensaje = 'Alumno registrado e inscrito correctamente.'.($alumno->tutorReutilizado ? ' El tutor ya estaba registrado; se conservaron sus datos.' : '');
 
         return redirect()->route('alumnos.show', $alumno)->with('status', $mensaje);
@@ -146,7 +163,7 @@ class AlumnoController extends Controller
         return $this->responderCuenta(fn () => $alumno->crearCuenta(), 'Alumno', route('alumnos.cuenta', $alumno));
     }
 
-    private function formulario(PerAlumno $alumno)
+    private function formulario(PerAlumno $alumno, ?TrxAspirante $aspirante = null)
     {
         $alumno->loadMissing(['persona', 'salud', 'expediente']);
         $carreras = AcaCarrera::where(fn ($consulta) => $consulta->where('activo', true)
@@ -157,6 +174,6 @@ class AlumnoController extends Controller
         $tiposSangre = PerAlumnoSalud::TIPOS_SANGRE;
         $parentescos = PerTutorAlumno::PARENTESCOS;
 
-        return view('control-escolar.alumnos.form', compact('alumno', 'carreras', 'grupos', 'hayPeriodoActivo', 'carreraBloqueada', 'tiposSangre', 'parentescos'));
+        return view('control-escolar.alumnos.form', compact('alumno', 'carreras', 'grupos', 'hayPeriodoActivo', 'carreraBloqueada', 'tiposSangre', 'parentescos', 'aspirante'));
     }
 }

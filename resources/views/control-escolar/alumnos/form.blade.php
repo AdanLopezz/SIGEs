@@ -10,6 +10,12 @@
 @section('contenido')
     <x-page-header :titulo="$editando ? 'Editar alumno' : 'Nuevo alumno'" :subtitulo="$editando ? 'Actualiza los datos de '.$persona->nombre_completo.'.' : 'Registra al alumno, a su tutor principal y su inscripción en el periodo activo.'" />
     <x-errores-formulario />
+    @if (! $editando && $aspirante)
+        <x-aviso tipo="info">
+            Convirtiendo en alumno al aspirante <strong>{{ $persona->nombre_completo }}</strong> ({{ $aspirante->ciclo_ingreso }}). Sus datos personales y la carrera ya vienen llenos: revísalos.
+            Al guardar, el aspirante pasa a Inscrito. <a href="{{ route('aspirantes.show', $aspirante) }}">Volver al aspirante</a>.
+        </x-aviso>
+    @endif
     @if (! $editando && (! $hayPeriodoActivo || $grupos->isEmpty()))
         <x-aviso tipo="aviso">
             {{ $hayPeriodoActivo ? 'No hay grupos en el periodo activo.' : 'No hay un periodo escolar activo.' }} Para registrar un alumno es necesario inscribirlo en un grupo.
@@ -19,11 +25,16 @@
     <form method="POST" action="{{ $editando ? route('alumnos.update', $alumno) : route('alumnos.store') }}" enctype="multipart/form-data" novalidate>
         @csrf
         @if ($editando) @method('PUT') @endif
+        @if (! $editando && $aspirante)<input type="hidden" name="trx_aspirante_id" value="{{ $aspirante->id }}">@endif
         <section class="form-seccion">
             <h2 class="form-seccion-titulo"><span>{{ ++$seccion }}</span> Datos personales</h2>
             <div class="row g-3">
                 @if ($editando)
                     <div class="col-md-4"><label for="curp" class="form-label"><i class="bi bi-lock" aria-hidden="true"></i> CURP</label><input id="curp" class="form-control" value="{{ $persona->curp }}" disabled><div class="form-text">La CURP no se modifica desde esta pantalla.</div></div>
+                @elseif ($aspirante)
+                    {{-- Conversión de aspirante: la CURP es la de su persona (no se duplica); el servidor la vuelve a fijar. --}}
+                    <div class="col-md-4"><label for="curp" class="form-label"><i class="bi bi-lock" aria-hidden="true"></i> CURP</label><input id="curp" class="form-control" value="{{ $persona->curp }}" disabled><div class="form-text">Es la del aspirante.</div></div>
+                    <input type="hidden" name="curp" value="{{ $persona->curp }}">
                 @else
                     <x-campo name="curp" label="CURP" maxlength="18" class="text-uppercase" :requerido="true" />
                 @endif

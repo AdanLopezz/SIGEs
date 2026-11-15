@@ -12,7 +12,7 @@
             <header>
                 <strong>{{ $clase::TITULO }}</strong>
                 @if ($plantel?->nombre)<small>{{ $plantel->nombre }}@if ($plantel->clave_cct) · CCT {{ $plantel->clave_cct }}@endif</small>@endif
-                <small>{{ $alcance->descripcion() }}</small>
+                <small>{{ $datos['descripcion'] ?? $alcance->descripcion() }}</small>
                 <small>Generado el {{ now()->format('d/m/Y H:i') }} por {{ auth()->user()->name }}</small>
             </header>
 

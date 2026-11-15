@@ -14,10 +14,14 @@
     </x-page-header>
 
     <x-filtros :accion="route('reportes.show', $clase::CLAVE)" :limpiar="route('reportes.show', $clase::CLAVE)">
-        <x-seleccion name="periodo" label="Periodo" col="" :opciones="$periodos" :valor="$alcance->periodo->id" />
+        @if ($clase::FILTROS_DE_GRUPO)
+            <x-seleccion name="periodo" label="Periodo" col="" :opciones="$periodos" :valor="$alcance->periodo->id" />
+        @endif
         <x-seleccion name="carrera" label="Carrera" col="" :opciones="$carreras" :valor="$filtros['carrera'] ?? ''" placeholder="Todas" />
-        <x-seleccion name="turno" label="Turno" col="" :opciones="$turnos" :valor="$filtros['turno'] ?? ''" placeholder="Todos" />
-        <x-seleccion name="grupo" label="Grupo" col="" :opciones="$alcance->gruposDelPeriodo->pluck('nombre_completo', 'id')" :valor="$filtros['grupo'] ?? ''" placeholder="Todos" />
+        @if ($clase::FILTROS_DE_GRUPO)
+            <x-seleccion name="turno" label="Turno" col="" :opciones="$turnos" :valor="$filtros['turno'] ?? ''" placeholder="Todos" />
+            <x-seleccion name="grupo" label="Grupo" col="" :opciones="$alcance->gruposDelPeriodo->pluck('nombre_completo', 'id')" :valor="$filtros['grupo'] ?? ''" placeholder="Todos" />
+        @endif
         @foreach ($clase::opciones() as $nombre => $opcion)
             <x-seleccion :name="$nombre" :label="$opcion['label']" col="" :opciones="$opcion['opciones']" :valor="$filtros[$nombre] ?? $opcion['omision']" />
         @endforeach
@@ -33,7 +37,7 @@
                 <div><dt>{{ $etiqueta }}</dt><dd>{{ Catalogo::celda($valor, in_array($indice, $datos['porcentajesResumen'] ?? [], true)) }}</dd></div>
             @endforeach
         </dl>
-        <p class="small texto-tenue mb-0 mt-2">{{ $alcance->descripcion() }} · {{ $alcance->grupos->count() }} {{ $alcance->grupos->count() === 1 ? 'grupo' : 'grupos' }}</p>
+        <p class="small texto-tenue mb-0 mt-2">{{ $datos['descripcion'] ?? $alcance->descripcion() }}@if ($clase::FILTROS_DE_GRUPO) · {{ $alcance->grupos->count() }} {{ $alcance->grupos->count() === 1 ? 'grupo' : 'grupos' }}@endif</p>
     </x-tarjeta>
 
     @foreach ($datos['secciones'] as $seccion)

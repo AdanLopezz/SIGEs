@@ -7,6 +7,7 @@ use App\Models\Archivo;
 use App\Models\PerAlumnoSalud;
 use App\Models\PerPersona;
 use App\Models\PerTutorAlumno;
+use App\Models\TrxAspirante;
 use App\Support\CredencialesDeAcceso;
 use Illuminate\Validation\Rule;
 
@@ -26,6 +27,13 @@ class AlumnoRequest extends ControlEscolarRequest
     {
         parent::prepareForValidation();
         $this->merge(['tutor_mismo_domicilio' => $this->boolean('tutor_mismo_domicilio')]);
+        // Conversión de un aspirante: la CURP es siempre la de su persona (no se duplica la persona).
+        if (! $this->route('alumno') && is_numeric($this->input('trx_aspirante_id'))) {
+            $curp = TrxAspirante::with('persona')->find((int) $this->input('trx_aspirante_id'))?->persona?->curp;
+            if ($curp) {
+                $this->merge(['curp' => $curp]);
+            }
+        }
         // Alta: el correo institucional (y futuro usuario) lo genera el sistema. Se conserva el del formulario si corresponde
         // al nombre y sigue libre; si no, se genera otro. En la edición se conserva el que tenga.
         if (! $this->route('alumno') && is_string($this->input('nombre')) && is_string($this->input('primer_apellido'))
@@ -66,6 +74,8 @@ class AlumnoRequest extends ControlEscolarRequest
             'expediente' => Archivo::reglas(! $alumno),
             // Queda en la bitácora; solo se pide al editar.
             'motivo' => $alumno ? ['required', 'string', 'max:255'] : ['exclude'],
+            // Solo en el alta: aspirante REGISTRADO que se convierte en alumno (TrxAspirante::convertir).
+            'trx_aspirante_id' => $alumno ? ['exclude'] : ['nullable', 'integer', Rule::exists('trx_aspirante', 'id')->where('estado', TrxAspirante::REGISTRADO)],
         ];
 
         return $alumno ? $reglas : $reglas + $this->reglasTutor();

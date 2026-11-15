@@ -64,7 +64,6 @@ return [
             ['titulo' => 'Bajas',         'ruta' => 'bajas.index',         'icono' => 'bi-person-dash',   'permiso' => 'bajas.registrar'],
             ['titulo' => 'Regularización', 'ruta' => 'regularizacion.index', 'icono' => 'bi-arrow-repeat', 'permiso' => 'recursamientos.administrar'],
             ['titulo' => 'Horarios',      'ruta' => 'horarios.index',      'icono' => 'bi-calendar-week', 'permiso' => 'horarios.administrar'],
-            ['titulo' => 'Aspirantes',    'ruta' => 'aspirantes.index',    'icono' => 'bi-person-plus',   'permiso' => 'aspirantes.administrar'],
         ],
     ],
 
@@ -98,6 +97,10 @@ return [
     [
         'seccion' => 'Vinculación',
         'opciones' => [
+            ['titulo' => 'Empresas',       'ruta' => 'empresas.index',   'icono' => 'bi-building',    'permiso' => ['dual.administrar', 'dual.revisar']],
+            ['titulo' => 'Convenios',      'ruta' => 'convenios.index',  'icono' => 'bi-file-earmark-text', 'permiso' => ['dual.administrar', 'dual.revisar']],
+            // Control Escolar (alumnos.editar) los consulta y convierte en alumno.
+            ['titulo' => 'Aspirantes',     'ruta' => 'aspirantes.index', 'icono' => 'bi-person-plus', 'permiso' => ['aspirantes.administrar', 'alumnos.editar']],
             ['titulo' => 'Formación dual', 'ruta' => 'dual.index',    'icono' => 'bi-briefcase',  'permiso' => 'dual.administrar'],
             ['titulo' => 'Egresados',      'ruta' => 'egreso.index',  'icono' => 'bi-award',      'permiso' => 'egreso.administrar'],
         ],

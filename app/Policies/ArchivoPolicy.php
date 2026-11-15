@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Archivo;
+use App\Models\OrgConvenio;
 use App\Models\PerAlumno;
 use App\Models\PerConsentimiento;
 use App\Models\TrxIncidencia;
@@ -18,7 +19,14 @@ class ArchivoPolicy
             || $archivo->subido_por_user_id === $usuario->id
             || $this->esExpedienteVisible($usuario, $archivo)
             || $this->esConsentimientoVisible($usuario, $archivo)
-            || $this->esDocumentoDeIncidenciaVisible($usuario, $archivo);
+            || $this->esDocumentoDeIncidenciaVisible($usuario, $archivo)
+            || $this->esConvenioVisible($usuario, $archivo);
+    }
+
+    // Vinculación: el convenio firmado lo ve quien administra o revisa convenios.
+    private function esConvenioVisible(User $usuario, Archivo $archivo): bool
+    {
+        return $usuario->canAny(['dual.administrar', 'dual.revisar']) && OrgConvenio::where('archivo_id', $archivo->id)->exists();
     }
 
     // Incidencias: el documento (receta, incapacidad, acta o citatorio) lo ve quien puede ver la incidencia.

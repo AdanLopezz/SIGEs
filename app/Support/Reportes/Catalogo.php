@@ -17,6 +17,7 @@ class Catalogo
         ReporteIncidencias::CLAVE => ReporteIncidencias::class,
         ReporteBajas::CLAVE => ReporteBajas::class,
         ReporteSeguimiento::CLAVE => ReporteSeguimiento::class,
+        ReporteAspirantes::CLAVE => ReporteAspirantes::class,
     ];
 
     // Primer carácter que Excel interpreta como fórmula.
@@ -65,7 +66,7 @@ class Catalogo
         $salida = fopen('php://temp', 'r+');
         fwrite($salida, "\xEF\xBB\xBF");
         fputcsv($salida, [$titulo]);
-        fputcsv($salida, [$alcance->descripcion()]);
+        fputcsv($salida, [$datos['descripcion'] ?? $alcance->descripcion()]);
         fputcsv($salida, ['Generado el '.now()->format('d/m/Y H:i')]);
         fputcsv($salida, []);
         foreach ($datos['resumen'] as $indice => [$etiqueta, $valor]) {

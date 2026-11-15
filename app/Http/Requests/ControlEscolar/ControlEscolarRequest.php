@@ -35,7 +35,8 @@ abstract class ControlEscolarRequest extends FormRequest
     // Datos de una persona; con $prefijo para el tutor del alta (tutor_nombre…).
     protected function reglasPersona(string $prefijo = '', bool $domicilioOpcional = false): array
     {
-        $domicilio = $domicilioOpcional ? ["exclude_if:{$prefijo}mismo_domicilio,1", 'required'] : ['required'];
+        // Los Requests convierten la casilla a booleano (prepareForValidation), así que se compara con true (con "1" nunca coincidía).
+        $domicilio = $domicilioOpcional ? ["exclude_if:{$prefijo}mismo_domicilio,true", 'required'] : ['required'];
 
         return [
             "{$prefijo}nombre" => ['required', 'string', 'max:100'],
