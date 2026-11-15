@@ -20,6 +20,7 @@ use App\Models\TrxAsistenciaClase;
 use App\Models\TrxCalificacion;
 use App\Models\TrxIncidencia;
 use App\Models\TrxResultadoAsignatura;
+use App\Models\TrxSeguimientoAlumno;
 use App\Support\Auditoria;
 use App\Support\CredencialesDeAcceso;
 use App\Support\PeriodoDeTrabajo;
@@ -94,6 +95,10 @@ class AlumnoController extends Controller
         $incidencias = auth()->user()->canAny(['incidencias.registrar', 'incidencias.cerrar'])
             ? TrxIncidencia::with('tipo')->visiblesPara(auth()->user())->deAlumno($alumno->id)->delPeriodo($periodoConsulta?->id)->recientes()->limit(5)->get()
             : null;
+        // Seguimiento (confidencial): solo con seguimiento.administrar y los casos que el usuario ve, de todos los periodos.
+        $seguimientos = auth()->user()->can('seguimiento.administrar')
+            ? TrxSeguimientoAlumno::with(['inscripcion.grupo.periodo', 'ultimaNota'])->visiblesPara(auth()->user())->deAlumno($alumno->id)->recientes()->get()
+            : null;
         $boleta = $inscripcionConsulta ? ['inscripcion' => $inscripcionConsulta] + $inscripcionConsulta->boleta() : null;
         // Inscribir, cambiar de grupo, dar de baja y reingresar operan sobre el periodo activo.
         $operaPeriodoActivo = ! PeriodoDeTrabajo::esConsultaHistorica();
@@ -120,7 +125,7 @@ class AlumnoController extends Controller
             ['trx_asistencia_clase', TrxAsistenciaClase::whereIn('aca_inscripcion_id', $inscripciones)->pluck('id')->all()],
         ];
 
-        return view('control-escolar.alumnos.show', compact('alumno', 'historial', 'consentimientos', 'avisos', 'tiposConsentimiento', 'limitesBaja', 'incidencias', 'boleta', 'recursamientos', 'asistenciaClase', 'adeudos', 'usuariosSugeridos', 'periodoConsulta', 'inscripcionConsulta', 'operaPeriodoActivo'));
+        return view('control-escolar.alumnos.show', compact('alumno', 'historial', 'consentimientos', 'avisos', 'tiposConsentimiento', 'limitesBaja', 'incidencias', 'seguimientos', 'boleta', 'recursamientos', 'asistenciaClase', 'adeudos', 'usuariosSugeridos', 'periodoConsulta', 'inscripcionConsulta', 'operaPeriodoActivo'));
     }
 
     public function edit(PerAlumno $alumno)

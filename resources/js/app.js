@@ -13,3 +13,4 @@ import './panel/calificaciones.js';
 import './panel/usuario-generado.js';
 import './panel/selector-periodo.js';
 import './panel/por-pagina.js';
+import './panel/modal-con-errores.js';

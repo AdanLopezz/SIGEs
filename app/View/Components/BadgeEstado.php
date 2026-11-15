@@ -42,6 +42,10 @@ class BadgeEstado extends Component
         'LEVE' => ['info', 'Leve', null],
         'MODERADA' => ['aviso', 'Moderada', null],
         'GRAVE' => ['peligro', 'Grave', null],
+        // Seguimiento del alumno (EN_SEGUIMIENTO es el mismo de Incidencias)
+        'ABIERTO' => ['aviso', 'Abierto', null],
+        'CERRADO' => ['neutro', 'Cerrado', null],
+        'RIESGO_ABANDONO' => ['peligro', 'Riesgo de abandono', 'bi-exclamation-octagon'],
         // Consentimiento
         'OTORGADO' => ['exito', 'Otorgado', 'bi-check-circle-fill'],
         'REVOCADO' => ['peligro', 'Revocado', 'bi-x-circle-fill'],

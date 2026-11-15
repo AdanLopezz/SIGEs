@@ -30,6 +30,8 @@ class Auditoria
         'per_consentimiento' => ['Consentimientos', 'consentimiento'],
         'per_credencial_acceso' => ['Credenciales', 'credencial'],
         'trx_incidencia' => ['Incidencias', 'incidencia'],
+        'trx_seguimiento_alumno' => ['Seguimiento de alumnos', 'caso de seguimiento'],
+        'trx_seguimiento_nota' => ['Notas de seguimiento', 'nota de seguimiento'],
         'cat_tipo_incidencia' => ['Tipos de incidencia', 'tipo de incidencia'],
         'com_notificacion' => ['Notificaciones', 'notificación'],
         'trx_asistencia_diaria' => ['Asistencia diaria', 'asistencia'],

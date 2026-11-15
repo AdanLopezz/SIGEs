@@ -1,0 +1,2 @@
+/* Seguimiento del alumno: textos largos (descripción, notas y acuerdos) conservan sus saltos de línea. */
+.seguimiento-texto{white-space:pre-line;overflow-wrap:anywhere}

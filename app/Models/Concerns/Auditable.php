@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
  * Opciones del modelo:
  *   protected array $auditarAcciones = ['INSERT'];        // por omisión las tres
  *   protected array $camposSensibles = ['nss', ...];      // se registra que cambió, sin su valor
+ *   protected string $etiquetaSensible = 'dato de salud'; // texto del marcador de los campos sensibles
  *   protected function contextoAuditoria(string $accion, array $campos): array  // ['motivo' => ?, 'usuario' => ?]
  */
 trait Auditable
@@ -82,8 +83,8 @@ trait Auditable
                 continue;
             }
             $campos[$campo] = match (true) {
-                in_array($campo, $sensibles, true) => ['', match ($accion) {
-                    'INSERT' => '(dato de salud registrado)', 'DELETE' => '(dato de salud eliminado)', default => '(dato de salud modificado)'}],
+                in_array($campo, $sensibles, true) => ['', '('.(property_exists($this, 'etiquetaSensible') ? $this->etiquetaSensible : 'dato de salud').' '.match ($accion) {
+                    'INSERT' => 'registrado)', 'DELETE' => 'eliminado)', default => 'modificado)'}],
                 $accion === 'INSERT' => ['', $valor],
                 $accion === 'DELETE' => [$valor, ''],
                 default => [$this->hasCast($campo, ['date', 'immutable_date']) && $this->getRawOriginal($campo) !== null

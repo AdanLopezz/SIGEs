@@ -163,6 +163,27 @@
             </div>
         @endif
 
+        @if ($seguimientos !== null)
+            {{-- Confidencial: solo con seguimiento.administrar y los casos visibles (de todos los periodos). Nunca en el portal. --}}
+            <div class="col-lg-6">
+                <x-tarjeta titulo="Seguimiento" icono="bi-person-heart" class="h-100">
+                    <x-slot:acciones><a href="{{ route('seguimiento.index', ['alumno' => $alumno->id]) }}" class="btn btn-sm btn-outline-siges">Ver en Seguimiento</a></x-slot:acciones>
+                    @forelse ($seguimientos as $caso)
+                        <div class="d-flex align-items-start justify-content-between gap-2 py-2 @unless ($loop->first) border-top @endunless">
+                            <div>
+                                <a href="{{ route('seguimiento.show', $caso) }}"><strong>#{{ $caso->id }} · {{ $caso->motivo_nombre }}</strong></a>
+                                <small class="d-block texto-tenue">{{ $caso->fecha_apertura->format('d/m/Y') }} · {{ $caso->inscripcion->grupo->periodo->nombre_visible }}</small>
+                                <small class="d-block texto-tenue">Última nota: {{ $caso->ultimaNota ? $caso->ultimaNota->fecha->format('d/m/Y').' · '.$caso->ultimaNota->tipo_nombre : 'sin notas' }}</small>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-end gap-1">@if ($caso->riesgo_abandono)<x-badge-estado estado="RIESGO_ABANDONO" />@endif<x-badge-estado :estado="$caso->estado" /></div>
+                        </div>
+                    @empty
+                        <x-estado-vacio icono="bi-person-heart" texto="Sin casos de seguimiento." />
+                    @endforelse
+                </x-tarjeta>
+            </div>
+        @endif
+
         @if ($boleta || $recursamientos->isNotEmpty())
             @php $inscripcionBoleta = $boleta['inscripcion'] ?? null; @endphp
             <div class="col-12">

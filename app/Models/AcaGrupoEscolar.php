@@ -102,6 +102,24 @@ class AcaGrupoEscolar extends Model
             ->orWhereHas('materias', fn (Builder $materias) => $materias->where('docente_id', $personal->id)));
     }
 
+    /**
+     * Grupos que el usuario acompaña como orientador o tutor (sin docentes ni Prefectura): Seguimiento del alumno.
+     * Todos para TrxSeguimientoAlumno::ROLES_VEN_TODOS. $periodo null = el activo.
+     */
+    public function scopeAcompanadosPor(Builder $consulta, User $usuario, int|array|null $periodo = null): Builder
+    {
+        $periodo === null ? $consulta->delPeriodoActivo() : $consulta->whereIn('aca_grupo_escolar.aca_periodo_escolar_id', (array) $periodo);
+        if ($usuario->hasAnyRole(TrxSeguimientoAlumno::ROLES_VEN_TODOS)) {
+            return $consulta;
+        }
+        $personal = $usuario->persona?->personal;
+        if (! $personal?->activo) {
+            return $consulta->whereRaw('1 = 0');
+        }
+
+        return $consulta->where(fn (Builder $grupos) => $grupos->where('orientador_id', $personal->id)->orWhere('tutor_id', $personal->id));
+    }
+
     public function scopeDeCarrera(Builder $consulta, ?int $carrera): Builder
     {
         return $carrera ? $consulta->where('aca_carrera_id', $carrera) : $consulta;
