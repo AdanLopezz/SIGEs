@@ -2,24 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
-     * Seed the application's database.
+     * Carga los datos iniciales de SIGEs: catálogos, usuario Sistema,
+     * roles, permisos y permisos de cada rol.
+     * El archivo es seguro de ejecutar varias veces: no duplica registros.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        DB::unprepared(
+            file_get_contents(database_path('seeders/sql/siges_datos_iniciales.sql'))
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(OrgAreaSeeder::class);
+
+        // Spatie guarda los permisos en caché; se limpia para que tome los nuevos.
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 }
