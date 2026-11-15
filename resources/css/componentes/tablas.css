@@ -1,0 +1,26 @@
+/* Más específicas que las reglas de .table de Bootstrap, que se carga después de app.css. */
+.table.tabla-siges {font-size:14px;--bs-table-border-color:var(--borde)}
+.tabla-siges > thead > tr > th {background:var(--fondo-suave);color:var(--siges-primary-dark);font-size:12px;white-space:nowrap}
+.tabla-siges > thead > tr > th,.tabla-siges > tbody > tr > th,.tabla-siges > tbody > tr > td {padding:16px}
+.tabla-siges > tbody > tr > td {max-width:320px;overflow-wrap:anywhere}
+.tabla-pie {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;color:var(--text-secondary);font-size:14px}
+.tabla-pie .pagination {margin-bottom:0;flex-wrap:wrap}
+.tabla-pie nav {max-width:100%}
+/* <x-por-pagina>: total y "Mostrar [n] por página"; en celular cada parte se acomoda en su renglón. */
+.tabla-pie .por-pagina {display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;min-width:0}
+.tabla-pie .por-pagina-form {display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0}
+.tabla-pie .por-pagina-form label {margin:0}
+.tabla-pie .por-pagina-form .form-select {width:auto;min-width:76px}
+@media (max-width:576px) {
+    .tabla-pie {padding:14px 16px}
+    .tabla-pie > nav {width:100%}
+}
+.tabla-pie .pagination {--bs-pagination-color:var(--siges-primary);--bs-pagination-hover-color:var(--siges-primary-dark);--bs-pagination-focus-color:var(--siges-primary-dark);--bs-pagination-active-bg:var(--siges-primary);--bs-pagination-active-border-color:var(--siges-primary);--bs-pagination-focus-box-shadow:0 0 0 .25rem rgba(23,63,115,.15)}
+.chip-tu {display:inline-block;margin-left:5px;padding:2px 7px;border-radius:6px;background:var(--siges-primary);color:#fff;font-size:11px}
+.tabla-siges .btn,.tabla-siges .badge-estado {white-space:nowrap;overflow-wrap:normal}
+/* Contiene a los descendientes con position:absolute (p. ej. .visually-hidden) para que no escapen del scroll de la tabla. */
+.table-responsive {position:relative}
+/* Tabla de captura de calificaciones: campos angostos por evaluación y el nombre del alumno sin negritas de encabezado. */
+.tabla-calificaciones > tbody > tr > th {font-weight:400;min-width:220px}
+.tabla-calificaciones .form-control {width:88px;margin:0 auto}
+.tabla-calificaciones > tbody > tr.fila-seccion > th {background:var(--fondo-suave);color:var(--siges-primary-dark);font-weight:700}

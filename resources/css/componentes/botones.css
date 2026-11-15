@@ -1,0 +1,30 @@
+/* Doble clase (.btn.btn-siges): Bootstrap se carga después de app.css y su .btn, con la misma especificidad, anularía los colores. */
+.btn.btn-siges {
+    --bs-btn-color:#fff;
+    --bs-btn-bg:var(--siges-primary);
+    --bs-btn-border-color:var(--siges-primary);
+    --bs-btn-hover-color:#fff;
+    --bs-btn-hover-bg:var(--siges-primary-dark);
+    --bs-btn-hover-border-color:var(--siges-primary-dark);
+    --bs-btn-active-color:#fff;
+    --bs-btn-active-bg:var(--siges-primary-dark);
+    --bs-btn-active-border-color:var(--siges-primary-dark);
+    --bs-btn-disabled-color:#fff;
+    --bs-btn-disabled-bg:var(--siges-primary);
+    --bs-btn-disabled-border-color:var(--siges-primary);
+    --bs-btn-focus-shadow-rgb:23,63,115;
+}
+.btn.btn-outline-siges {
+    --bs-btn-color:var(--siges-primary);
+    --bs-btn-border-color:var(--siges-primary);
+    --bs-btn-hover-color:#fff;
+    --bs-btn-hover-bg:var(--siges-primary);
+    --bs-btn-hover-border-color:var(--siges-primary);
+    --bs-btn-active-color:#fff;
+    --bs-btn-active-bg:var(--siges-primary-dark);
+    --bs-btn-active-border-color:var(--siges-primary-dark);
+    --bs-btn-disabled-color:var(--siges-primary);
+    --bs-btn-disabled-bg:transparent;
+    --bs-btn-disabled-border-color:var(--siges-primary);
+    --bs-btn-focus-shadow-rgb:23,63,115;
+}

@@ -1,0 +1,45 @@
+/* Credencial CR80 (85.6 × 54 mm) e impresión */
+.impresion-body{min-height:100vh;margin:0;padding:24px 16px;background:var(--background);color:var(--text-primary)}
+.impresion-contenedor{display:flex;flex-direction:column;align-items:center;gap:18px;max-width:640px;margin:0 auto}
+.impresion-acciones{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+
+.credencial{
+    display:grid;
+    grid-template-columns:1fr 23mm;
+    grid-template-rows:auto 1fr auto;
+    gap:1.5mm 2.5mm;
+    width:85.6mm;
+    height:54mm;
+    padding:3mm 3.5mm;
+    overflow:hidden;
+    background:var(--white);
+    border:1px solid var(--borde);
+    border-radius:3mm;
+    box-shadow:0 8px 24px rgba(22,44,72,.12);
+    color:var(--siges-primary-dark);
+    font-size:2.4mm;
+    line-height:1.25;
+}
+.credencial-encabezado{grid-column:1 / -1;display:flex;align-items:center;gap:2mm;padding-bottom:1.2mm;border-bottom:.5mm solid var(--siges-primary)}
+.credencial-encabezado img{width:7mm;height:7mm;object-fit:contain}
+.credencial-encabezado strong{display:block;font-size:2.8mm;line-height:1.1}
+.credencial-encabezado small{display:block;font-size:2mm;color:var(--text-secondary)}
+.credencial-datos{display:flex;gap:2.5mm;min-width:0}
+.credencial-foto{display:flex;flex-shrink:0;align-items:center;justify-content:center;width:16mm;height:20mm;border-radius:1.5mm;background:var(--fondo-acento);color:var(--siges-primary);font-size:6mm;font-weight:700}
+.credencial-texto{min-width:0}
+.credencial-nombre{margin:0 0 .8mm;font-size:3mm;font-weight:700;line-height:1.1;overflow-wrap:anywhere}
+.credencial-texto dl{display:grid;grid-template-columns:auto 1fr;gap:.2mm 1.5mm;margin:0}
+.credencial-texto dt{color:var(--text-secondary);font-weight:600}
+.credencial-texto dd{margin:0;overflow-wrap:anywhere}
+.credencial-qr{grid-row:2 / 4;grid-column:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8mm}
+.credencial-qr svg{width:22mm;height:22mm}
+.credencial-qr small{font-size:1.8mm;color:var(--text-secondary);text-align:center}
+.credencial-pie{font-size:2mm;color:var(--text-secondary)}
+
+@media print{
+    @page{size:85.6mm 54mm;margin:0}
+    .impresion-body{padding:0;background:var(--white)}
+    .impresion-contenedor{display:block;max-width:none;margin:0}
+    .no-imprimir{display:none !important}
+    .credencial{border:none;border-radius:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

@@ -1,0 +1,55 @@
+/* Horarios (cuadrícula semanal, hoja imprimible) y pase de lista por clase. */
+.horario-tabla{min-width:720px;table-layout:fixed}
+.horario-tabla th,.horario-tabla td{border:1px solid var(--borde);vertical-align:top;padding:4px}
+.horario-tabla thead th{background:var(--fondo-suave);color:var(--siges-primary-dark);font-weight:600;text-align:center;font-size:.85rem}
+.horario-tabla .horario-hora{width:96px;background:var(--fondo-suave);color:var(--text-secondary);font-size:.8rem;white-space:nowrap}
+.horario-tabla .horario-hora small{display:block}
+.horario-clase{display:block;height:100%;padding:6px 8px;border-left:4px solid var(--siges-secondary);border-radius:6px;background:var(--fondo-acento);color:var(--text-primary);font-size:.8rem;line-height:1.3;text-decoration:none}
+.horario-clase + .horario-clase{margin-top:4px}
+.horario-clase strong{display:block;color:var(--siges-primary-dark)}
+.horario-clase small{display:block;color:var(--text-secondary)}
+a.horario-clase:hover,a.horario-clase:focus-visible{background:var(--info-fondo);border-left-color:var(--siges-primary)}
+.horario-clase.actual{border-left-color:var(--aviso);background:var(--aviso-fondo)}
+.horario-vacia{display:flex;align-items:center;justify-content:center;min-height:36px;height:100%;border-radius:6px;color:var(--text-secondary);font-size:.8rem;text-decoration:none}
+a.horario-vacia:hover,a.horario-vacia:focus-visible{background:var(--fondo-suave);color:var(--siges-primary)}
+a.horario-vacia .bi{opacity:0}
+a.horario-vacia:hover .bi,a.horario-vacia:focus-visible .bi{opacity:1}
+
+/* Pase de lista: una fila por alumno con A/F/R/J (btn-check). */
+.pase-lista-fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 16px;border-top:1px solid var(--borde)}
+.pase-lista-fila:first-child{border-top:none}
+.pase-lista-marcas{display:flex;gap:4px}
+.pase-lista-marcas .btn.btn-sm{min-width:40px;font-weight:700}
+.pase-lista-marcas .btn-check:checked + .btn.marca-A{background:var(--exito);border-color:var(--exito);color:var(--white)}
+.pase-lista-marcas .btn-check:checked + .btn.marca-F{background:var(--peligro);border-color:var(--peligro);color:var(--white)}
+.pase-lista-marcas .btn-check:checked + .btn.marca-R{background:var(--aviso);border-color:var(--aviso);color:var(--white)}
+.pase-lista-marcas .btn-check:checked + .btn.marca-J{background:var(--info);border-color:var(--info);color:var(--white)}
+
+/* Tabla alumnos × fechas de una materia. */
+.asistencia-materia-tabla .asistencia-celda{text-align:center;font-weight:700;font-size:.8rem}
+.asistencia-materia-tabla .asistencia-celda.marca-A{color:var(--exito)}
+.asistencia-materia-tabla .asistencia-celda.marca-F{color:var(--peligro);background:var(--peligro-fondo)}
+.asistencia-materia-tabla .asistencia-celda.marca-R{color:var(--aviso);background:var(--aviso-fondo)}
+.asistencia-materia-tabla .asistencia-celda.marca-J{color:var(--info);background:var(--info-fondo)}
+.tabla-siges > tbody > tr.bajo-minimo > td{background:var(--peligro-fondo)}
+
+/* Portal: horario por día. */
+.portal .horario-dia + .horario-dia{margin-top:16px}
+.portal .horario-dia h2{margin:0 0 8px;font-size:1rem;color:var(--siges-primary-dark)}
+
+/* Hoja imprimible (layouts/impresion): carta horizontal. */
+.impresion-contenedor:has(.horario-hoja){max-width:1100px;align-items:stretch}
+.horario-hoja{page:horario;width:100%;padding:24px;background:var(--white);border:1px solid var(--borde);border-radius:12px;color:var(--text-primary)}
+.horario-hoja header{padding-bottom:10px;margin-bottom:14px;border-bottom:2px solid var(--siges-primary)}
+.horario-hoja header strong{display:block;font-size:1.1rem;color:var(--siges-primary-dark)}
+.horario-hoja header small{display:block;color:var(--text-secondary)}
+.horario-hoja .horario-tabla{width:100%;min-width:0;border-collapse:collapse}
+
+/* Página propia: credencial.css define @page de tamaño credencial para las demás impresiones. */
+@page horario{size:letter landscape;margin:10mm}
+
+@media print{
+    .impresion-contenedor:has(.horario-hoja){max-width:none}
+    .horario-hoja{border:none;border-radius:0;padding:0}
+    .horario-hoja .horario-clase{break-inside:avoid}
+}

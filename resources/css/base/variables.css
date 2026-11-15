@@ -1,0 +1,27 @@
+:root{
+    --siges-primary:#173f73;
+    --siges-primary-dark:#0c2c54;
+    --siges-secondary:#2868a9;
+    --siges-accent:#438bd0;
+    --text-primary:#1d2939;
+    --text-secondary:#667085;
+    --background:#eef3f8;
+    --white:#fff;
+
+    /* Neutros de bordes y fondos suaves */
+    --borde:#e4e9f0;
+    --fondo-suave:#edf3fa;
+    --fondo-acento:#e3ecf8;
+
+    /* Estados (badge-estado, alerta-siges, control de acceso) */
+    --exito:#166345;
+    --exito-fondo:#e3f3ec;
+    --aviso:#8a5a00;
+    --aviso-fondo:#fff4e0;
+    --peligro:#b42318;
+    --peligro-fondo:#fdecea;
+    --info:#1d4f91;
+    --info-fondo:#e3ecf8;
+    --neutro:#5c6573;
+    --neutro-fondo:#f0f2f5;
+}

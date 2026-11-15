@@ -1,0 +1,32 @@
+/* Cambio de periodo: indicador de pasos y hoja imprimible del resumen (layouts/impresion). */
+.pasos{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0 0 16px}
+.pasos li{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--borde);border-radius:999px;background:var(--white);color:var(--text-secondary);font-size:.875rem}
+.pasos .pasos-numero{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--neutro-fondo);font-size:.75rem;font-weight:700}
+.pasos li.actual{border-color:var(--siges-primary);color:var(--siges-primary);font-weight:600}
+.pasos li.actual .pasos-numero{background:var(--siges-primary);color:var(--white)}
+.pasos li.hecho{color:var(--exito)}
+.pasos li.hecho .pasos-numero{background:var(--exito-fondo);color:var(--exito)}
+
+/* Totales del paso 3 y del resumen */
+.cambio-periodo-totales{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0}
+.cambio-periodo-totales div{display:flex;align-items:center;gap:6px}
+.cambio-periodo-totales dt{font-weight:400;color:var(--text-secondary)}
+.cambio-periodo-totales dd{margin:0;font-weight:700;color:var(--text-primary)}
+
+.impresion-contenedor:has(.cambio-periodo-hoja){max-width:960px;align-items:stretch}
+.cambio-periodo-hoja{page:cambio-periodo;width:100%;max-width:960px;padding:24px;background:var(--white);border:1px solid var(--borde);border-radius:12px;color:var(--text-primary)}
+.cambio-periodo-hoja header{padding-bottom:10px;margin-bottom:14px;border-bottom:2px solid var(--siges-primary)}
+.cambio-periodo-hoja header strong{display:block;font-size:1.1rem;color:var(--siges-primary-dark)}
+.cambio-periodo-hoja header small{display:block;color:var(--text-secondary)}
+.cambio-periodo-hoja h2{margin:18px 0 8px;font-size:1rem;color:var(--siges-primary-dark)}
+.cambio-periodo-hoja table{width:100%;border-collapse:collapse;font-size:.8rem}
+.cambio-periodo-hoja th,.cambio-periodo-hoja td{padding:4px 6px;border-bottom:1px solid var(--borde);text-align:left;vertical-align:top}
+
+/* Página propia: credencial.css define @page de tamaño credencial para las demás impresiones. */
+@page cambio-periodo{size:letter;margin:14mm}
+
+@media print{
+    .impresion-contenedor:has(.cambio-periodo-hoja){max-width:none}
+    .cambio-periodo-hoja{max-width:none;border:none;border-radius:0;padding:0}
+    .cambio-periodo-hoja tr{break-inside:avoid}
+}

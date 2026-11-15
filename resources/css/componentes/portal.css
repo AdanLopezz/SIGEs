@@ -1,0 +1,69 @@
+/* =========================================================
+   PORTAL DE ALUMNO Y PADRE DE FAMILIA
+   Pensado primero para celular (375 px): tarjetas y listas, sin tablas anchas.
+   Todos los selectores van dentro de .portal.
+   ========================================================= */
+
+/* Encabezado: alumno, grupo y (padre) cambiar de hijo */
+.portal .portal-alumno{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
+.portal .portal-alumno strong{display:block;font-size:18px;color:var(--siges-primary-dark)}
+.portal .portal-alumno small{color:var(--text-secondary)}
+
+/* Navegación entre pantallas: chips con desplazamiento horizontal en celular */
+.portal .portal-nav{display:flex;gap:8px;margin:0 0 20px;padding:0 0 4px;overflow-x:auto;list-style:none}
+.portal .portal-nav a{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--borde);border-radius:999px;background:var(--white);color:var(--siges-primary);font-size:14px;font-weight:600;white-space:nowrap;text-decoration:none}
+.portal .portal-nav a.activo{border-color:var(--siges-primary);background:var(--siges-primary);color:#fff}
+
+/* Cifras del resumen */
+.portal .portal-resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.portal .portal-cifra{display:block;padding:16px;border:1px solid var(--borde);border-radius:14px;background:var(--white);color:inherit;text-decoration:none}
+.portal a.portal-cifra:hover{border-color:var(--siges-accent)}
+.portal .portal-cifra strong{display:block;font-size:28px;line-height:1.1;color:var(--siges-primary-dark)}
+.portal .portal-cifra span{color:var(--text-secondary);font-size:14px}
+
+/* Listas en tarjetas (materias, incidencias, permisos, avisos, hijos) */
+.portal .portal-lista{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.portal .portal-item{padding:16px;border:1px solid var(--borde);border-radius:14px;background:var(--white)}
+.portal .portal-item-encabezado{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px}
+.portal .portal-item-encabezado strong{color:var(--siges-primary-dark)}
+.portal .portal-badges{display:flex;flex-wrap:wrap;gap:6px}
+.portal .portal-item .dato-lista{margin:12px 0 0}
+.portal .portal-item-acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.portal .portal-item.no-leido{border-left:4px solid var(--siges-accent)}
+.portal a.portal-item{display:block;color:inherit;text-decoration:none}
+.portal a.portal-item:hover{border-color:var(--siges-accent)}
+
+/* Parciales de una materia */
+.portal .portal-parciales{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;margin-top:12px}
+.portal .portal-parcial{padding:8px;border-radius:10px;background:var(--fondo-suave);text-align:center}
+.portal .portal-parcial small{display:block;color:var(--text-secondary);font-size:12px}
+.portal .portal-parcial strong{font-size:16px}
+.portal .portal-parcial.definitiva{background:var(--fondo-acento)}
+
+/* Calendario de asistencia: 7 columnas que caben en 375 px */
+.portal .portal-meses{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.portal .portal-meses strong{font-size:17px;color:var(--siges-primary-dark);text-transform:capitalize}
+.portal .portal-calendario{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.portal .portal-calendario .dia-semana{padding:4px 0;color:var(--text-secondary);font-size:12px;font-weight:700;text-align:center}
+.portal .portal-calendario .dia{min-height:52px;padding:4px;border:1px solid var(--borde);border-radius:8px;background:var(--white);font-size:13px}
+.portal .portal-calendario .dia.vacio{border:none;background:none}
+.portal .portal-calendario .dia span{display:block;margin-top:2px;font-size:11px;font-weight:700}
+.portal .portal-calendario .dia.presente{border-color:var(--exito);background:var(--exito-fondo);color:var(--exito)}
+.portal .portal-calendario .dia.retardo{border-color:var(--aviso);background:var(--aviso-fondo);color:var(--aviso)}
+.portal .portal-calendario .dia.falta{border-color:var(--peligro);background:var(--peligro-fondo);color:var(--peligro)}
+.portal .portal-calendario .dia.justificada{border-color:var(--info);background:var(--info-fondo);color:var(--info)}
+.portal .portal-leyenda{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+
+/* Selector de hijos */
+.portal .portal-hijos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.portal .portal-hijo{width:100%;padding:18px;border:1px solid var(--borde);border-radius:14px;background:var(--white);color:inherit;text-align:left;cursor:pointer}
+.portal .portal-hijo:hover,
+.portal .portal-hijo:focus-visible{border-color:var(--siges-accent)}
+.portal .portal-hijo.elegido{border:2px solid var(--siges-primary)}
+.portal .portal-hijo strong{display:block;font-size:17px;color:var(--siges-primary-dark)}
+.portal .portal-hijo small{display:block;color:var(--text-secondary)}
+
+@media(max-width:576px){
+    .portal .portal-calendario .dia{min-height:44px;padding:3px;font-size:12px}
+    .portal .portal-cifra strong{font-size:24px}
+}

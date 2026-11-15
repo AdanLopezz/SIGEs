@@ -1,0 +1,26 @@
+/* Estados: <x-badge-estado>, <x-aviso>, <x-alertas>, <x-errores-formulario> */
+.badge-estado{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;line-height:1.2;white-space:nowrap}
+.badge-estado.exito{background:var(--exito-fondo);color:var(--exito)}
+.badge-estado.aviso{background:var(--aviso-fondo);color:var(--aviso)}
+.badge-estado.peligro{background:var(--peligro-fondo);color:var(--peligro)}
+.badge-estado.info{background:var(--info-fondo);color:var(--info)}
+.badge-estado.neutro{background:var(--neutro-fondo);color:var(--neutro)}
+
+.alerta-siges{display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;padding:14px 16px;border:1px solid color-mix(in srgb,currentColor 25%,transparent);border-radius:12px;font-size:15px;line-height:1.5}
+.alerta-siges[hidden]{display:none}
+.alerta-siges > i{flex-shrink:0;font-size:18px;line-height:1.3}
+.alerta-siges > div{min-width:0;flex:1}
+.alerta-siges ul{margin:6px 0 0;padding-left:20px}
+.alerta-siges a{color:inherit;font-weight:700}
+.alerta-siges.exito{background:var(--exito-fondo);color:var(--exito)}
+.alerta-siges.aviso{background:var(--aviso-fondo);color:var(--aviso)}
+.alerta-siges.peligro{background:var(--peligro-fondo);color:var(--peligro)}
+.alerta-siges.info{background:var(--info-fondo);color:var(--info)}
+/* Con .alert de Bootstrap solo para poder cerrarla (data-bs-dismiss) */
+.alerta-siges.alert{padding:14px 16px;border:1px solid color-mix(in srgb,currentColor 25%,transparent);border-radius:12px;margin-bottom:18px}
+.alerta-siges .btn-close{margin-left:auto;flex-shrink:0}
+
+.texto-tenue{color:var(--text-secondary)}
+.texto-peligro{color:var(--peligro)}
+.dropdown-item.peligro{color:var(--peligro)}
+.dropdown-menu .dropdown-item.peligro:active{background:var(--peligro);color:var(--white)}

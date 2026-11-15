@@ -1,0 +1,120 @@
+/* Tarjetas */
+.panel-grid{
+    display:grid;
+    grid-template-columns:minmax(280px,1fr) 2fr;
+    gap:22px;
+    align-items:start;
+}
+
+.panel-card{
+    padding:22px 24px;
+    background:var(--white);
+    border:1px solid var(--borde);
+    border-radius:16px;
+    box-shadow:0 8px 24px rgba(22,44,72,.05);
+}
+
+/* <x-tarjeta>: título con icono y acciones opcionales a la derecha */
+.panel-card-encabezado{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px 12px;
+    margin:0 0 16px;
+}
+
+.panel-card-titulo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:0;
+    font-size:17px;
+    font-weight:700;
+    color:var(--siges-primary-dark);
+}
+
+.panel-card-titulo i{color:var(--siges-secondary)}
+.panel-card-acciones{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Tarjeta sin relleno (tabla a ras): el encabezado lleva su propio relleno */
+.panel-card.p-0 > .panel-card-encabezado{padding:20px 24px 0}
+
+.dato-lista{
+    display:grid;
+    grid-template-columns:max-content 1fr;
+    gap:10px 16px;
+    margin:0;
+    font-size:14px;
+}
+
+.dato-lista dt{color:var(--text-secondary);font-weight:600}
+.dato-lista dd{margin:0;word-break:break-word}
+
+.mono{font-family:Consolas,monospace;font-size:13px}
+
+.chip{
+    display:inline-block;
+    margin:0 4px 4px 0;
+    padding:3px 10px;
+    border-radius:999px;
+    background:var(--fondo-acento);
+    color:var(--siges-primary);
+    font-size:12px;
+    font-weight:700;
+}
+
+.estado-vacio{
+    padding:30px 10px;
+    text-align:center;
+    color:var(--text-secondary);
+}
+
+.estado-vacio i{font-size:36px;color:var(--siges-accent)}
+.estado-vacio p{margin:10px 0 0;line-height:1.6}
+
+.modulos-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:14px;
+}
+
+.modulo-card{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    padding:16px;
+    border:1px solid var(--borde);
+    border-radius:14px;
+    color:var(--text-primary);
+    text-decoration:none;
+    transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+
+.modulo-card i{font-size:24px;color:var(--siges-secondary)}
+.modulo-card small{color:var(--text-secondary)}
+
+.modulo-card:hover{
+    border-color:var(--siges-accent);
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(23,63,115,.1);
+}
+
+
+@media(max-width:992px){.panel-grid{grid-template-columns:1fr}}
+@media(max-width:576px){.dato-lista{grid-template-columns:1fr;gap:2px}.dato-lista dd{margin-bottom:10px}.panel-card{padding:18px 16px}.panel-card.p-0 > .panel-card-encabezado{padding:16px 16px 0}}
+@media(prefers-reduced-motion:reduce){.modulo-card{transition:none!important}}
+
+/* <x-archivo-enlace>: el nombre del archivo puede ser una sola palabra larga; se corta en lugar de desbordar. */
+.archivo-enlace{position:relative;display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 8px;max-width:100%}
+.archivo-enlace > span{min-width:0;overflow-wrap:anywhere}
+
+/* Línea de tiempo (detalle de incidencia): pasos hechos y pendientes. */
+.linea-tiempo{list-style:none;margin:0;padding:0}
+.linea-tiempo li{position:relative;display:flex;gap:12px;padding:0 0 18px}
+.linea-tiempo li:last-child{padding-bottom:0}
+.linea-tiempo li:not(:last-child)::before{content:"";position:absolute;left:15px;top:32px;bottom:2px;width:2px;background:var(--borde)}
+.linea-tiempo .paso-icono{display:flex;flex-shrink:0;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--neutro-fondo);color:var(--neutro)}
+.linea-tiempo li.hecho .paso-icono{background:var(--info-fondo);color:var(--siges-primary)}
+.linea-tiempo .paso-texto{min-width:0;padding-top:4px}
+.linea-tiempo li:not(.hecho) .paso-texto strong{color:var(--text-secondary)}

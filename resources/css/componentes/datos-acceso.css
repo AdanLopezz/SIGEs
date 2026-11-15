@@ -1,0 +1,33 @@
+/* Datos de acceso: contraseña temporal en pantalla y ficha imprimible (layouts/impresion). */
+.dato-lista .datos-acceso-contrasena{letter-spacing:.08em;font-weight:700;color:var(--siges-primary-dark)}
+
+.datos-acceso-ficha{
+    page:datos-acceso;
+    width:100%;
+    max-width:600px;
+    padding:28px 32px;
+    background:var(--white);
+    border:1px solid var(--borde);
+    border-radius:12px;
+    box-shadow:0 8px 24px rgba(22,44,72,.12);
+    color:var(--siges-primary-dark);
+}
+.datos-acceso-encabezado{display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:18px;border-bottom:2px solid var(--siges-primary)}
+.datos-acceso-encabezado img{width:44px;height:44px;object-fit:contain}
+.datos-acceso-encabezado strong{display:block;font-size:1.1rem;line-height:1.2}
+.datos-acceso-encabezado small{display:block;color:var(--text-secondary)}
+.datos-acceso-lista{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0 0 18px}
+.datos-acceso-lista dt{color:var(--text-secondary);font-weight:600}
+.datos-acceso-lista dd{margin:0;overflow-wrap:anywhere}
+/* Elemento puntual agrandado (permitido por la guía, como la credencial): lo que la persona tiene que teclear. */
+.datos-acceso-lista .datos-acceso-valor{font-size:1.2rem;font-weight:700;letter-spacing:.06em}
+.datos-acceso-indicaciones{margin:0 0 16px;padding-left:18px;color:var(--text-secondary);font-size:.9rem}
+.datos-acceso-indicaciones li + li{margin-top:4px}
+.datos-acceso-pie{font-size:.8rem;color:var(--text-secondary)}
+
+/* Página propia: credencial.css define @page de tamaño credencial para las demás impresiones. */
+@page datos-acceso{size:letter;margin:18mm}
+
+@media print{
+    .datos-acceso-ficha{max-width:none;border:none;border-radius:0;box-shadow:none;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

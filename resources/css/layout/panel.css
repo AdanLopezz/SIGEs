@@ -1,0 +1,279 @@
+/* =========================================================
+   PANEL DEL SISTEMA (layout con menú lateral)
+   ========================================================= */
+
+.panel-body{
+    margin:0;
+    min-height:100vh;
+    background:var(--background);
+    color:var(--text-primary);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+/* Menú lateral */
+.panel-sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    z-index:40;
+    width:250px;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(180deg,#0d315c 0%,#173f73 100%);
+    color:#fff;
+    overflow-y:auto;
+}
+
+.sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:20px 20px 18px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.sidebar-brand img{width:42px;height:42px;object-fit:contain}
+.sidebar-brand strong{display:block;font-size:19px;line-height:1.1}
+.sidebar-brand small{display:block;font-size:12px;color:rgba(255,255,255,.7)}
+
+.sidebar-nav{padding:12px 12px 24px}
+
+.sidebar-section{
+    margin:18px 10px 6px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.55);
+}
+
+.sidebar-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:2px;
+    padding:10px 12px;
+    border-radius:10px;
+    color:rgba(255,255,255,.85);
+    font-size:14.5px;
+    text-decoration:none;
+    transition:background-color .2s ease,color .2s ease;
+}
+
+.sidebar-link i{font-size:18px;width:20px;text-align:center}
+
+.sidebar-link:hover{background:rgba(255,255,255,.08);color:#fff}
+
+.sidebar-link.active{
+    background:rgba(255,255,255,.16);
+    color:#fff;
+    font-weight:700;
+    box-shadow:inset 3px 0 0 #fff;
+}
+
+/* Zona principal */
+.panel-main{margin-left:250px;min-height:100vh;min-width:0}
+
+.panel-topbar{
+    position:sticky;
+    top:0;
+    z-index:30;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    background:var(--white);
+    border-bottom:1px solid var(--borde);
+}
+
+.topbar-left{display:flex;align-items:center;gap:14px;min-width:0}
+
+.topbar-menu-btn{
+    display:none;
+    border:none;
+    background:none;
+    font-size:26px;
+    color:var(--siges-primary);
+    cursor:pointer;
+}
+
+.topbar-periodo{min-width:0;overflow:hidden;font-size:14px;color:var(--text-secondary);white-space:nowrap;text-overflow:ellipsis}
+.topbar-periodo strong{color:var(--siges-primary)}
+
+/* Selector de periodo (abre el modal "Selecciona periodo"). */
+.panel-topbar .selector-periodo-boton{display:flex;align-items:center;gap:6px;max-width:100%;padding:6px 10px;border:1px solid var(--borde);border-radius:10px;background:var(--white);cursor:pointer}
+.panel-topbar .selector-periodo-boton:hover{background:var(--fondo-suave)}
+.panel-topbar .selector-periodo-boton strong{overflow:hidden;text-overflow:ellipsis}
+.panel-topbar .selector-periodo-boton small{font-size:11px}
+.panel-topbar .selector-periodo-boton .bi{flex-shrink:0;font-size:12px;color:var(--siges-primary)}
+
+/* Modal "Selecciona periodo": el elegido va con el color primario. */
+.selector-periodo-lista{display:flex;flex-direction:column;gap:6px;max-height:55vh;margin:0;padding:0;overflow-y:auto;list-style:none}
+.selector-periodo-lista .selector-periodo-opcion{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;width:100%;padding:10px 14px;border:1px solid var(--borde);border-radius:10px;background:var(--white);color:var(--text-primary);text-align:left;cursor:pointer}
+.selector-periodo-lista .selector-periodo-opcion:hover{background:var(--fondo-suave)}
+.selector-periodo-lista .selector-periodo-opcion:focus-visible{outline:2px solid var(--siges-accent);outline-offset:2px}
+.selector-periodo-lista .selector-periodo-nombre{flex:1 1 auto;font-weight:600}
+.selector-periodo-lista .selector-periodo-opcion small{color:var(--text-secondary)}
+.selector-periodo-lista .selector-periodo-activo{padding:1px 8px;border-radius:999px;background:var(--fondo-acento);color:var(--siges-primary);font-size:12px;font-weight:600}
+.selector-periodo-lista .selector-periodo-opcion.elegido{border-color:var(--siges-primary);background:var(--siges-primary);color:var(--white)}
+.selector-periodo-lista .selector-periodo-opcion.elegido small{color:var(--white)}
+.selector-periodo-lista .selector-periodo-opcion.elegido .selector-periodo-activo{background:var(--white)}
+
+/* El nombre y los roles se recortan con "…"; el avatar y el botón de salir nunca se encogen. */
+.topbar-user{display:flex;align-items:center;gap:12px;min-width:0;margin-left:16px}
+
+.topbar-user-info{min-width:0;max-width:280px;text-align:right;line-height:1.25}
+.topbar-user-info strong,
+.topbar-user-info small{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.topbar-user-info strong{font-size:14px}
+.topbar-user-info small{font-size:12px;color:var(--text-secondary)}
+.topbar-avatar,
+.topbar-user form{flex-shrink:0}
+
+.topbar-avatar{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--siges-primary);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.topbar-logout{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--borde);
+    border-radius:10px;
+    background:var(--white);
+    color:var(--siges-primary);
+    font-size:18px;
+    cursor:pointer;
+    transition:background-color .2s ease;
+}
+
+.topbar-logout:hover{background:var(--fondo-suave)}
+
+/* Campana de avisos (portal de Alumno y Padre de familia) con contador de no leídos. */
+.topbar-avisos{
+    position:relative;
+    flex-shrink:0;
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--borde);
+    border-radius:10px;
+    color:var(--siges-primary);
+    font-size:18px;
+    text-decoration:none;
+}
+
+.topbar-avisos:hover{background:var(--fondo-suave)}
+
+.topbar-avisos-contador{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    min-width:20px;
+    padding:1px 5px;
+    border-radius:10px;
+    background:var(--peligro);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    line-height:18px;
+    text-align:center;
+}
+
+.panel-content{padding:28px}
+
+/* Encabezado de página (<x-page-header>): título y subtítulo a la izquierda, acciones a la derecha */
+.page-header{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:12px 16px;
+    margin-bottom:22px;
+}
+
+.page-header-texto{min-width:0}
+.page-header-acciones{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+
+.volver{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:6px;
+    color:var(--siges-secondary);
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.volver:hover{color:var(--siges-primary-dark);text-decoration:underline}
+
+.page-header h1{
+    margin:0 0 4px;
+    font-size:28px;
+    font-weight:750;
+    color:var(--siges-primary-dark);
+}
+
+.page-header p{margin:0;color:var(--text-secondary)}
+
+.sidebar-backdrop{display:none}
+
+/* Tablet y celular: el menú se abre con el botón ☰ */
+@media(max-width:992px){
+    .panel-sidebar{
+        transform:translateX(-100%);
+        transition:transform .3s ease;
+    }
+
+    .panel-main{margin-left:0}
+    .topbar-menu-btn{display:block}
+
+    body.sidebar-open .panel-sidebar{transform:translateX(0)}
+
+    body.sidebar-open .sidebar-backdrop{
+        display:block;
+        position:fixed;
+        inset:0;
+        z-index:35;
+        background:rgba(13,49,92,.45);
+    }
+
+
+}
+
+/* Tableta en vertical y celular: solo las iniciales (el nombre y los roles quedan en el tooltip). */
+@media(max-width:768px){.topbar-user-info{display:none}}
+
+@media(max-width:576px){
+    .panel-topbar{padding:0 16px}
+    .panel-content{padding:18px 16px}
+    .topbar-user-info,
+    .topbar-periodo:not(.selector-periodo-boton){display:none}
+    .panel-topbar .selector-periodo-boton{max-width:46vw;padding:6px 8px}
+}
+
+@media(prefers-reduced-motion:reduce){
+    .panel-sidebar,
+    .sidebar-link,
+
+    .topbar-logout{
+        transition:none!important;
+    }
+}
