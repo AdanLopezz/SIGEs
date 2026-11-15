@@ -33,7 +33,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // Los archivos privados solo se ven por archivos.ver, que pasa por ArchivoPolicy.
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],
