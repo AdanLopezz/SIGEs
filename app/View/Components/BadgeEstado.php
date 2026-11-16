@@ -99,6 +99,7 @@ class BadgeEstado extends Component
         'REINSCRITO' => ['exito', 'Reinscrito', null],
         'OMITIDO' => ['aviso', 'Omitido', null],
         'EGRESO' => ['info', 'Candidato a egreso', null],
+        'EGRESADO' => ['info', 'Egresado', 'bi-mortarboard'],
         'PROXIMO_PERIODO' => ['info', 'Próximo periodo', null],
         // Horarios y pase de lista por clase (CatTipoAsistencia::ESTADOS)
         'CLASE_A' => ['exito', 'Asistencia', null],

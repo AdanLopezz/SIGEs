@@ -72,7 +72,13 @@
                             <td>{{ $alumno['origen'] }}</td>
                             <td>{{ $alumno['destino'] ?? '—' }}</td>
                             <td><x-badge-estado :estado="$alumno['resultado']" /></td>
-                            <td>{{ $alumno['motivo'] ?? '' }}</td>
+                            <td>{{ $alumno['motivo'] ?? '' }}
+                                @if ($alumno['resultado'] === \App\Support\CambioDePeriodo::EGRESO)
+                                    @can('egreso.administrar')
+                                        <a class="d-block" href="{{ route('egreso.show', $alumno['alumno_id']) }}">Revisar egreso</a>
+                                    @endcan
+                                @endif
+                            </td>
                             @if ($veFichas)<td class="text-end"><a class="btn btn-sm btn-outline-siges" href="{{ route('alumnos.show', $alumno['alumno_id']) }}" aria-label="Ficha de {{ $alumno['nombre'] }}">Ficha</a></td>@endif
                         </tr>
                     @endforeach

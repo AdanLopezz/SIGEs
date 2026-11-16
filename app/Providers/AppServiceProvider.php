@@ -41,5 +41,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('portal-hijo', [PortalPolicy::class, 'hijo']);
         Gate::define('portal-confirmar-permiso', [PortalPolicy::class, 'confirmarPermiso']);
         Gate::define('portal-aviso', [PortalPolicy::class, 'verAviso']);
+        Gate::define('egreso-confirmar', [\App\Policies\EgresoPolicy::class, 'confirmar']);
     }
 }

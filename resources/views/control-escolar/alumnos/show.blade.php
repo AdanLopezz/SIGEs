@@ -12,6 +12,9 @@
     <x-page-header :titulo="$persona->nombre_completo" :volver="[route('alumnos.index'), 'Volver a Alumnos']">
         <x-slot:subtitulo><span class="mono">{{ $alumno->matricula }}</span> · {{ $alumno->carrera->nombre }} · <x-badge-estado :estado="$alumno->estado->nombre" /></x-slot:subtitulo>
         <x-slot:acciones>
+            @can('egreso.administrar')
+                <a href="{{ route('egreso.show', $alumno) }}" class="btn btn-outline-siges"><i class="bi bi-mortarboard" aria-hidden="true"></i> Egreso y procesos</a>
+            @endcan
             {{-- Inscribir, cambiar de grupo, baja y reingreso operan sobre el periodo activo: no se ofrecen al consultar otro. --}}
             @if ($activo && $operaPeriodoActivo)
                 @can('inscripciones.administrar')

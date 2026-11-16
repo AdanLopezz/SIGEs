@@ -27,6 +27,8 @@ class Auditoria
         'per_tutor_alumno' => ['Tutores de alumnos', 'tutor'],
         'aca_inscripcion' => ['Inscripciones', 'inscripción'],
         'aca_baja' => ['Bajas', 'baja'],
+        'trx_egreso' => ['Egresos', 'egreso'],
+        'trx_proceso_egreso' => ['Procesos de egreso', 'proceso de egreso'],
         'per_consentimiento' => ['Consentimientos', 'consentimiento'],
         'per_credencial_acceso' => ['Credenciales', 'credencial'],
         'trx_incidencia' => ['Incidencias', 'incidencia'],

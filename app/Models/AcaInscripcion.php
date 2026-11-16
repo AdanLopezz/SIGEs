@@ -20,7 +20,9 @@ class AcaInscripcion extends Model
 
     public const CAMBIO_GRUPO = 'CAMBIO_GRUPO';
 
-    public const ESTADOS = [self::INSCRITO => 'Inscrito', self::BAJA => 'Baja', self::CAMBIO_GRUPO => 'Cambio de grupo'];
+    public const EGRESADO = 'EGRESADO';
+
+    public const ESTADOS = [self::INSCRITO => 'Inscrito', self::BAJA => 'Baja', self::CAMBIO_GRUPO => 'Cambio de grupo', self::EGRESADO => 'Egresado'];
 
     protected $table = 'aca_inscripcion';
 

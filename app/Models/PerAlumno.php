@@ -58,6 +58,16 @@ class PerAlumno extends Model
         return $this->belongsTo(CatEstadoAlumno::class, 'cat_estado_alumno_id');
     }
 
+    public function egreso(): HasOne
+    {
+        return $this->hasOne(TrxEgreso::class, 'per_alumno_id');
+    }
+
+    public function procesosEgreso(): HasMany
+    {
+        return $this->hasMany(TrxProcesoEgreso::class, 'per_alumno_id');
+    }
+
     public function expediente(): BelongsTo
     {
         return $this->belongsTo(Archivo::class, 'expediente_archivo_id');
