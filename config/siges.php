@@ -9,6 +9,16 @@
 
 return [
 
+    'notificaciones' => [
+        // Se activa después de aplicar el cambio de esquema y configurar SMTP.
+        'habilitadas' => env('SIGES_NOTIFICACIONES_HABILITADAS', false),
+        'mailer' => 'smtp',
+        'cola' => 'notificaciones',
+        'maximo_intentos' => 3,
+        'espera_minutos' => 5,
+        'lote' => 100,
+    ],
+
     // Cuentas de acceso: el usuario se genera como nombre.apellido + 4 dígitos + @dominio.
     // El dominio NO es del plantel: nunca se envía correo a estas direcciones (los correos van a per_persona.email_personal).
     'cuentas' => [

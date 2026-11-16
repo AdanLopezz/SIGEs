@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::command('siges:cerrar-asistencia')->weekdays()->dailyAt('21:00')->withoutOverlapping();
 // Convenios vigentes cuya fecha de fin ya pasó → VENCIDO (las pantallas ya los muestran vencidos aunque no corra: estado efectivo).
 Schedule::command('siges:vencer-convenios')->dailyAt('00:10')->withoutOverlapping();
+Schedule::command('siges:programar-notificaciones')->everyMinute()->withoutOverlapping();
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());

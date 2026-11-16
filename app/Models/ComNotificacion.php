@@ -7,8 +7,10 @@ use App\Support\Auditoria;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
-// Bandeja de salida. Aquí solo se crean PENDIENTE; el envío (y com_notificacion_intento) será otro módulo.
+// Bandeja compartida por el portal y el envío de correo.
 class ComNotificacion extends Model
 {
     use Auditable;
@@ -23,17 +25,31 @@ class ComNotificacion extends Model
 
     public const LEIDA = 'LEIDA';
 
+    public const ENVIADA = 'ENVIADA';
+
+    public const FALLIDA = 'FALLIDA';
+
     public const ESTADOS = ['PENDIENTE' => 'Pendiente', 'ENVIADA' => 'Enviada', 'FALLIDA' => 'Fallida', 'LEIDA' => 'Leída'];
 
     protected $table = 'com_notificacion';
 
-    protected $fillable = ['per_persona_id', 'canal', 'asunto', 'mensaje', 'estado'];
+    protected $fillable = ['per_persona_id', 'trx_incidencia_id', 'canal', 'asunto', 'mensaje', 'estado'];
 
     protected $attributes = ['estado' => self::PENDIENTE];
 
     public function persona(): BelongsTo
     {
         return $this->belongsTo(PerPersona::class, 'per_persona_id');
+    }
+
+    public function incidencia(): BelongsTo
+    {
+        return $this->belongsTo(TrxIncidencia::class, 'trx_incidencia_id');
+    }
+
+    public function intentos(): HasMany
+    {
+        return $this->hasMany(ComNotificacionIntento::class, 'com_notificacion_id');
     }
 
     public function scopePendientes(Builder $consulta): Builder
@@ -67,10 +83,12 @@ class ComNotificacion extends Model
      */
     public function marcarLeida(): void
     {
-        if ($this->estaLeida()) {
-            return;
-        }
-        Auditoria::motivoPorDefecto('Lectura del aviso en el portal');
-        $this->forceFill(['estado' => self::LEIDA])->save();
+        DB::transaction(function () {
+            $actual = static::whereKey($this->id)->lockForUpdate()->firstOrFail();
+            if (! $actual->estaLeida()) {
+                Auditoria::conMotivo('Lectura del aviso en el portal', fn () => $actual->forceFill(['estado' => self::LEIDA])->save());
+            }
+            $this->setRawAttributes($actual->getAttributes(), true);
+        });
     }
 }

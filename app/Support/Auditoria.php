@@ -34,6 +34,7 @@ class Auditoria
         'trx_seguimiento_nota' => ['Notas de seguimiento', 'nota de seguimiento'],
         'cat_tipo_incidencia' => ['Tipos de incidencia', 'tipo de incidencia'],
         'com_notificacion' => ['Notificaciones', 'notificación'],
+        'com_notificacion_intento' => ['Intentos de notificación', 'intento de notificación'],
         'trx_asistencia_diaria' => ['Asistencia diaria', 'asistencia'],
         'trx_asistencia_clase' => ['Asistencia por clase', 'asistencia de clase'],
         'aca_horario' => ['Horarios', 'clase del horario'],

@@ -130,6 +130,7 @@ return [
             ['titulo' => 'Usuarios',      'ruta' => 'usuarios.index',     'icono' => 'bi-people',       'permiso' => 'usuarios.administrar'],
             ['titulo' => 'Configuración', 'ruta' => 'configuracion.edit', 'icono' => 'bi-gear',         'permiso' => 'configuracion.administrar'],
             ['titulo' => 'Bitácora',      'ruta' => 'auditoria.index',    'icono' => 'bi-shield-check', 'permiso' => 'auditoria.ver'],
+            ['titulo' => 'Notificaciones', 'ruta' => 'notificaciones.index', 'icono' => 'bi-envelope', 'permiso' => 'usuarios.administrar'],
         ],
     ],
 

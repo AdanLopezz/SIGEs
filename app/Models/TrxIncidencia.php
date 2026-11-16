@@ -315,6 +315,7 @@ class TrxIncidencia extends Model
         foreach ($alumno->tutores as $tutor) {
             ComNotificacion::create([
                 'per_persona_id' => $tutor->per_persona_id,
+                'trx_incidencia_id' => $this->id,
                 'canal' => ComNotificacion::EMAIL,
                 'asunto' => Str::limit("Incidencia de {$nombre}: {$this->tipo->nombre}", 200, ''),
                 'mensaje' => "Le informamos que el {$fecha} se registró una incidencia de tipo «{$this->tipo->nombre}» para {$nombre}. "

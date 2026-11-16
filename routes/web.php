@@ -62,6 +62,7 @@ Route::middleware('auth:web')->group(function () {
         require __DIR__.'/modulos/archivos.php';
         require __DIR__.'/modulos/control-escolar.php';
         require __DIR__.'/modulos/auditoria.php';
+        require __DIR__.'/modulos/notificaciones.php';
         require __DIR__.'/modulos/prefectura.php';
         require __DIR__.'/modulos/orientacion.php';
         require __DIR__.'/modulos/vinculacion.php';
